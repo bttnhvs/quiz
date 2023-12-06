@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <form [formGroup]="form">
+    <div *ngFor="let field of fieldOptions">
+      <label>
+        <input type="radio" formControlName="selectedField" [value]="field"> {{ field }}
+      </label>
+    </div>
+  </form>
+
+  <p>Selected Field: {{ form.get('selectedField').value }}</p>
+  <div class="card sm-3" id="card" *ngIf="movie!=null; else showScore">
+    <div class="row g-0">
+      <div class="col-sm-5">
+        <picture>
+          <source srcset="{{movie?.horizontalImage}}" media="(max-width: 576px)">
+          <img class="img-fluid rounded-start" id="quiz__h-image" src="{{movie?.verticalImage}}" alt="{{movie?.title}}">
+        </picture>
+      </div>
+      <div class="col-sm-7 ">
+        <div class="card-body">
+          <div class="movie__title"><span class="quiz__total-question">{{i + 1}}
+            /{{totalQuestions}}</span> {{movie?.title}}</div>
+          <hr>
+          <div class="options" *ngFor="let option of movie?.options" style="line-height: 2">
+            <label>
+              <input
+                type="radio"
+                name="options"
+                id="option1"
+                value="{{option}}"
+                (change)="onSelecting($event.target)"
+              />{{option | date:'dd/MM/yyyy'}}
+            </label>
+          </div>
+          <div class="d-grid gap-2 mx-auto">
+            <button type="button"
+                    class="btn btn-primary"
+                    style="margin-top: 30px"
+                    (click)="onNext()"
+                    [disabled]="toggleBool">Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #showScore>
+    <div class="quiz__result">
+      <div class="quiz__score">Your total score is {{score}}</div>
+      <div class="quiz__percentage"> {{percentage}}% - {{message}}</div>
+    </div>
+  </ng-template>
+</div>

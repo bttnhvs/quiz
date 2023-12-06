@@ -1,0 +1,35 @@
+$base-blue: rgb(14, 59, 131);
+$blue-gradient: linear-gradient(90deg, rgba(14, 59, 131, 1) 0%, rgba(28, 81, 178, 1) 35%, rgba(82, 172, 225, 1) 100%);
+
+.container-fluid {
+  background: $base-blue;
+  background: $blue-gradient;
+  text-align: center;
+  color: white;
+  height: 100vh;
+}
+
+@mixin text($size, $align, $height) {
+  font-size: $size;
+  text-align: $align;
+  line-height: $height;
+  font-weight: 400;
+}
+
+.quiz__info {
+  @include text(1.5rem, center, 2);
+}
+
+.quiz__title {
+  @include text(3rem, center, 1);
+  margin-top: 150px;
+}
+
+.btn-light {
+  background: white;
+  color: rgb(14, 59, 131);
+}
+
+.btn-light:hover{
+  background: #f2f6f8;
+}
